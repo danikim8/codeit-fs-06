@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <a href="/">홈</a> | 
+        <a href="/counter.html">카운터</a>
+    </header>
+    <hr />
+
+
+    <h1>이것은 카운터입니다</h1>
+
+    <div>
+        <button id="minus-button">-</button>
+        <span id="count">0</span>
+        <button id="plus-button">+</button>
+    </div>
+
+    <hr />
+    <footer>이것은 푸터입니다</footer>
+
+    <script>
+        let count = 100;
+        const minusDOM = document.getElementById("minus-button")
+        const plusDOM = document.getElementById("plus-button")
+        const countDOM = document.getElementById("count")
+
+        const rerender = () => {
+            countDOM.innerHTML = count
+        }
+
+        const minus = () => {
+            count = count - 1;
+
+            rerender()
+        }
+        const plus = () => {
+            count = count + 1;
+
+            rerender()
+        }
+
+        minusDOM.addEventListener('click', minus)
+        plusDOM.addEventListener('click', plus)
+
+    </script>
+</body>
+</html>
