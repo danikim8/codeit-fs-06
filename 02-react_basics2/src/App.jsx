@@ -1,9 +1,10 @@
-import Fruits from "./Fruits";
+import Posts from "./Posts";
+import "./output.css";
 
 function App() {
   return (
     <div>
-      <Fruits />
+      <Posts />
     </div>
   );
 }
