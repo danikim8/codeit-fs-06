@@ -1,0 +1,30 @@
+### 회원가입
+POST http://localhost:5050/users/sign-up
+Content-Type: application/json
+
+{
+    "email": "instructor@yoojinyoung.com",
+    "password": "qwer1234"
+}
+
+### 로그인
+POST http://localhost:5050/users/log-in
+Content-Type: application/json
+
+{
+    "email": "instructor@yoojinyoung.com",
+    "password": "qwer1234"
+}
+
+### 상품 생성
+POST http://localhost:5050/products
+Content-Type: application/json
+Authorization: I'm admin
+
+{
+    "name": "할로윈 특급 의상",
+    "price": 500000
+}
+
+### 상품 목록 조회
+GET http://localhost:5050/products
