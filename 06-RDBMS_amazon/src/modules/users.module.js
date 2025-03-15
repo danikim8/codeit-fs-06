@@ -1,5 +1,6 @@
 const express = require("express");
 const prisma = require("../db/client");
+const adminOnly = require("../middlewares/adminOnly.middleware");
 
 const usersRouter = express.Router();
 
@@ -7,8 +8,6 @@ usersRouter.post("/sign-up", async (req, res, next) => {
   try {
     const data = req.body;
     const result = await prisma.user.create({ data });
-
-    console.log(result);
 
     res.status(201).send("Created");
   } catch (e) {
@@ -28,6 +27,22 @@ usersRouter.post("/log-in", async (req, res, next) => {
       return res.status(400).send("비밀번호가 잘못되었어요...");
 
     res.status(200).send("로그인 성공~!");
+  } catch (e) {
+    next(e);
+  }
+});
+
+/**
+ * 전체 유저 목록 불러오기
+ */
+usersRouter.get("/", adminOnly, async (req, res, next) => {
+  try {
+    const users = await prisma.user.findMany({
+      omit: { password: true },
+      include: { favoriteProduct: true },
+    });
+
+    res.json(users);
   } catch (e) {
     next(e);
   }

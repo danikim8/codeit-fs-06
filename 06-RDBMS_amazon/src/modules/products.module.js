@@ -33,4 +33,34 @@ productsRouter.get("/", async (req, res, next) => {
   }
 });
 
+/**
+ * 상품 상세 조회
+ */
+productsRouter.get("/:productId", async (req, res, next) => {
+  try {
+    const productId = Number(req.params.productId);
+    const product = await prisma.product.findUnique({
+      where: { id: productId },
+    });
+
+    res.json(product);
+  } catch (e) {
+    next(e);
+  }
+});
+
+/**
+ * 상품 삭제
+ */
+productsRouter.delete("/:productId", adminOnly, async (req, res, next) => {
+  try {
+    const productId = Number(req.params.productId);
+    await prisma.product.delete({ where: { id: productId } });
+
+    res.status(204).send("No content");
+  } catch (e) {
+    next(e);
+  }
+});
+
 module.exports = productsRouter;
