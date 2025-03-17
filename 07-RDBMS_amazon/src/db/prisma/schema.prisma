@@ -41,6 +41,7 @@ model Order {
   userId      String
   orderItems  OrderItem[]
   totalAmount Int?
+  paidAmount  Int         @default(0)
   orderedAt   DateTime    @default(now())
 }
 
