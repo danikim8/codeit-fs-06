@@ -35,14 +35,16 @@ enum ProductCategory {
 }
 
 model Order {
-  id          String      @id @default(uuid())
-  status      OrderStatus @default(pending)
-  user        User        @relation(fields: [userId], references: [id])
-  userId      String
-  orderItems  OrderItem[]
-  totalAmount Int?
-  paidAmount  Int         @default(0)
-  orderedAt   DateTime    @default(now())
+  id             String      @id @default(uuid())
+  status         OrderStatus @default(pending)
+  user           User        @relation(fields: [userId], references: [id])
+  userId         String
+  orderItems     OrderItem[]
+  totalAmount    Int? // 총 판매 금액
+  paidAmount     Int         @default(0) // 총 결제 금액
+  refundedAmount Int         @default(0) // 총 환불 금액
+  balanceAmount  Int         @default(0) // 총 잔액 (총 결제 금액 - 총 환불 금액)
+  orderedAt      DateTime    @default(now())
 }
 
 model OrderItem {

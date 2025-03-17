@@ -37,10 +37,10 @@ Content-Type: application/json
 Authorization: Basic $b15487b7-be9c-4092-9f3a-2db30ff92c40@
 
 {
-    "orderId": "5c282a5c-83fb-4f1a-97bc-a54abaa1988e",
-    "paidAmount": 2000000
+    "orderId": "34c9a9df-4c64-46ce-93d5-5b9c170d6dad",
+    "paidAmount": 3961000
 }
 
 ### 주문 취소
-DELETE http://localhost:5555/orders/cancel/5c282a5c-83fb-4f1a-97bc-a54abaa1988e
+DELETE http://localhost:5555/orders/34c9a9df-4c64-46ce-93d5-5b9c170d6dad/cancel
 Authorization: Basic $b15487b7-be9c-4092-9f3a-2db30ff92c40@
