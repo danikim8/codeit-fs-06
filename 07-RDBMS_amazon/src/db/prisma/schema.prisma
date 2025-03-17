@@ -11,19 +11,21 @@ datasource db {
 }
 
 model User {
-  id                String  @id @default(uuid())
-  email             String  @unique
+  id                String            @id @default(uuid())
+  email             String            @unique
   name              String
   encryptedPassword String
-  orders            Order[] // 그럼 여기 적혀 있는 건 왜인가요?
+  orders            Order[]
+  favoriteProducts  FavoriteProduct[]
 }
 
 model Product {
-  id         Int             @id @default(autoincrement())
-  name       String
-  price      Int
-  category   ProductCategory
-  orderItems OrderItem[]
+  id               Int               @id @default(autoincrement())
+  name             String
+  price            Int
+  category         ProductCategory
+  orderItems       OrderItem[]
+  favoriteProducts FavoriteProduct[]
 }
 
 enum ProductCategory {
@@ -64,3 +66,23 @@ enum OrderStatus {
   completed
   refunded
 }
+
+model FavoriteProduct {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  product   Product  @relation(fields: [productId], references: [id])
+  productId Int
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId])
+}
+
+// "찜하기"
+//   - 유저 정보도 필수로 갖고 있어야 하고
+//   - 상품 정보도 필수로 갖고 있어야 함
+
+// 만약에 상품을 삭제한다면?
+//   -> 프리즈마 기본값: 상품을 참조하고 있는 엔티티가 있으면, 삭제를 거절한다.
+//   -> 우리가 하고 싶은 것: 상품을 참조하고 있는 엔티티도 함께 삭제한다. 상품이 삭제되면, 그 상품에 대한 좋아요도 전부 같이 삭제한다.
+// 만약에 유저를 삭제한다면?
