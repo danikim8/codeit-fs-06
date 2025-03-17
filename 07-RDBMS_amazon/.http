@@ -10,3 +10,23 @@ Content-Type: application/json
     "name": "유진영",
     "password": "qwer1234"
 }
+
+### 로그인
+POST http://localhost:5555/users/log-in
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "password": "qwer1234"
+}
+
+### 주문하기
+POST http://localhost:5555/orders
+Content-Type: application/json
+Authorization: Basic $b15487b7-be9c-4092-9f3a-2db30ff92c40@
+
+[
+    {"productId": 1, "quantity": 2},
+    {"productId": 2, "quantity": 1},
+    {"productId": 5, "quantity": 3}
+]

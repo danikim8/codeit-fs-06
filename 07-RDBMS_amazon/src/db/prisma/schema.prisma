@@ -36,12 +36,12 @@ enum ProductCategory {
 
 model Order {
   id          String      @id @default(uuid())
-  status      OrderStatus
+  status      OrderStatus @default(pending)
   user        User        @relation(fields: [userId], references: [id])
   userId      String
-  totalAmount Int
-  orderedAt   DateTime    @default(now())
   orderItems  OrderItem[]
+  totalAmount Int?
+  orderedAt   DateTime    @default(now())
 }
 
 model OrderItem {
