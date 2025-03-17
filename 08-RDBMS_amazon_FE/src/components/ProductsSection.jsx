@@ -3,6 +3,7 @@ import api from "../api/index.api";
 
 function ProductsSection() {
   const [products, setProducts] = useState([]);
+  const [favoriteProductIds, setFavoriteProductIds] = useState([]);
 
   const handleClickLikeButton = async (productId) => {
     await api.products.likeProduct(productId);
@@ -11,7 +12,11 @@ function ProductsSection() {
   const handleClickRefreshFavoriteProducts = () => {
     api.users
       .getFavoriteProducts()
-      .then((result) => console.log("찜한 상품들: ", result));
+      .then((result) => setFavoriteProductIds(result));
+  };
+
+  const checkIsFavoriteProduct = (productId) => {
+    return favoriteProductIds.includes(productId);
   };
 
   useEffect(() => {
@@ -26,7 +31,11 @@ function ProductsSection() {
       <ul>
         {products.map((product) => (
           <li key={product.id}>
-            <span>
+            <span
+              style={{
+                color: checkIsFavoriteProduct(product.id) ? "red" : "black",
+              }}
+            >
               "{product.name}" ({product.price.toLocaleString()}원)
             </span>
 

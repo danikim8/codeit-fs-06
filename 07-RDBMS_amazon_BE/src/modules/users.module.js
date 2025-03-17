@@ -54,9 +54,14 @@ usersRouter.post("/log-in", async (req, res, next) => {
 usersRouter.get("/favorite-products", userOnly, async (req, res, next) => {
   try {
     const userId = req.userId;
-    const data = await prisma.favoriteProduct.findMany({ where: { userId } });
+    const favoriteProducts = await prisma.favoriteProduct.findMany({
+      where: { userId },
+    });
+    const favoriteProductIds = favoriteProducts.map(
+      (favoriteProduct) => favoriteProduct.productId
+    );
 
-    res.json(data);
+    res.json(favoriteProductIds);
   } catch (e) {
     next(e);
   }
