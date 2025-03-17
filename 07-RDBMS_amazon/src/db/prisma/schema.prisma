@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String  @id @default(uuid())
+  email             String  @unique
+  name              String
+  encryptedPassword String
+  orders            Order[] // 그럼 여기 적혀 있는 건 왜인가요?
+}
+
+model Product {
+  id         Int             @id @default(autoincrement())
+  name       String
+  price      Int
+  category   ProductCategory
+  orderItems OrderItem[]
+}
+
+enum ProductCategory {
+  shoes
+  food
+  accessory
+  clothes
+  electronics
+}
+
+model Order {
+  id          String      @id @default(uuid())
+  status      OrderStatus
+  user        User        @relation(fields: [userId], references: [id])
+  userId      String
+  totalAmount Int
+  orderedAt   DateTime    @default(now())
+  orderItems  OrderItem[]
+}
+
+model OrderItem {
+  id        String  @id @default(uuid())
+  order     Order   @relation(fields: [orderId], references: [id])
+  orderId   String
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+  quantity  Int
+  amount    Int
+}
+
+enum OrderStatus {
+  pending
+  paid
+  onShipping
+  completed
+  refunded
+}
