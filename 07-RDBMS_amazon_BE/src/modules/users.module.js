@@ -1,5 +1,6 @@
 const express = require("express");
 const prisma = require("../db/prisma/client.prisma");
+const userOnly = require("../middlewares/userOnly.middleware");
 
 const usersRouter = express.Router();
 
@@ -42,6 +43,20 @@ usersRouter.post("/log-in", async (req, res, next) => {
     const token = "$" + user.id + "@"; // 이걸 알고리즘에 의해 만든 비밀스러운 토큰이라고 가정합시다
 
     res.send(token);
+  } catch (e) {
+    next(e);
+  }
+});
+
+/**
+ * 찜한 상품들 목록 받아오기
+ */
+usersRouter.get("/favorite-products", userOnly, async (req, res, next) => {
+  try {
+    const userId = req.userId;
+    const data = await prisma.favoriteProduct.findMany({ where: { userId } });
+
+    res.json(data);
   } catch (e) {
     next(e);
   }
