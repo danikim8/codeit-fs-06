@@ -12,6 +12,30 @@ POST http://localhost:7777/users/log-in
 Content-Type: application/json
 
 {
-    "username": "test2",
-    "password": "helloworld2"
+    "username": "jin0.u",
+    "password": "helloworld"
 }
+
+### 글 작성하기
+POST http://localhost:7777/posts
+Content-Type: application/json
+Authorization: @cm8dtbdf80000cfjnag98flt0@
+
+{
+    "boardName": "general",
+    "title": "MBTI 이거 무조건 맞음 2222",
+    "content": "INTJ랑 ENFP랑 잘 맞는다고 함 2222"
+}
+
+### 댓글 남기기
+POST http://localhost:7777/comments
+Content-Type: application/json
+Authorization: @cm8dtbdf80000cfjnag98flt0@
+
+{
+    "postId": 1,
+    "content": "아님, 나 INTJ인데 ENFP랑 잘 안맞음"
+}
+
+### 글 조회하기 (댓글까지 포함해서 보여주도록)
+GET http://localhost:7777/posts/1

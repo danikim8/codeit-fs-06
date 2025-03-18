@@ -1,11 +1,13 @@
 const express = require("express");
 const router = require("./modules/index.module");
 const errorHandler = require("./middlewares/errorHandler.middleware");
+const authentication = require("./middlewares/authentication.middleware");
 
 const app = express();
 const PORT = 7777;
 
 app.use(express.json());
+app.use(authentication);
 app.use(router);
 app.use(errorHandler);
 
