@@ -39,3 +39,7 @@ Authorization: @cm8dtbdf80000cfjnag98flt0@
 
 ### 글 조회하기 (댓글까지 포함해서 보여주도록)
 GET http://localhost:7777/posts/1
+
+### 글 좋아요 누르기
+PUT http://localhost:7777/posts/1/like
+Authorization: @cm8dtbdf80000cfjnag98flt0@
