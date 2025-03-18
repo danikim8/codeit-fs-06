@@ -1,0 +1,17 @@
+### 회원가입
+POST http://localhost:7777/users/sign-up
+Content-Type: application/json
+
+{
+    "username": "test",
+    "password": "helloworld"
+}
+
+### 로그인
+POST http://localhost:7777/users/log-in
+Content-Type: application/json
+
+{
+    "username": "test2",
+    "password": "helloworld2"
+}
