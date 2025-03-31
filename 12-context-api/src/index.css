@@ -1,0 +1,12 @@
+.app {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.left {
+  background-color: bisque;
+}
+
+.right {
+  background-color: darkgray;
+}
