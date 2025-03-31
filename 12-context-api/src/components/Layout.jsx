@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, Outlet } from "react-router";
+import { useAuth } from "../contexts/auth.context";
 
 function Layout() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const auth = useAuth();
 
   return (
     <div>
       <header className="header">
-        <button onClick={() => setIsLoggedIn((prev) => !prev)}>
-          로그인 토글
-        </button>
-        <span>로그인 여부 {isLoggedIn.toString()}</span>
+        <button onClick={auth.toggleLogIn}>로그인 토글</button>
+        <span>로그인 여부 {auth.isLoggedIn.toString()}</span>
       </header>
 
       <nav>

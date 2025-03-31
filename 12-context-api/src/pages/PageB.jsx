@@ -1,10 +1,12 @@
 import React from "react";
+import { useAuth } from "../contexts/auth.context";
 
 function PageB() {
+  const auth = useAuth();
+
   return (
     <div>
-      PageB
-      <span>로그인 여부</span>
+      <span>PageB</span> | <span>로그인 여부 {auth.isLoggedIn.toString()}</span>
     </div>
   );
 }
