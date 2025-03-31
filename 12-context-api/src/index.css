@@ -10,3 +10,8 @@
 .right {
   background-color: darkgray;
 }
+
+.header {
+  background-color: bisque;
+  border-bottom: 1px solid salmon;
+}
